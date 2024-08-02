@@ -71,7 +71,7 @@ def scrape_twitter_data():
     driver.execute_script(f"window.scrollTo(0, {scroll_position});")
     sleep(3) 
     data1 = driver.find_element(By.XPATH, '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[1]/div[2]/div/div[1]/div/div/div/div/div[2]/div[2]')
-    print("0000000000000000", data1.text)
+    print("Data scraped is :", data1.text)
     sleep(10)
     
 
