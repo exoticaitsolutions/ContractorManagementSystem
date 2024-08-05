@@ -1,0 +1,10 @@
+{
+    "businessTypes": [
+        {"name": "MBE - Minority Business Enterprise", "business_type_code": "MBE"},
+        {"name": "SBE - Small Business Enterprise", "business_type_code": "SBE"},
+        {"name": "WBE - Women Business Enterprise", "business_type_code": "WBE"},
+        {"name": "VOB - Veteran Owned Business", "business_type_code": "VOB"},
+        {"name": "DVOB - Disabled Veteran Owned Business", "business_type_code": "DVOB"},
+        {"name": "LGBTQ - LGBTQ Owned Business", "business_type_code": "LGBTQ"}
+    ]
+}
