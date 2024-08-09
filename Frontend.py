@@ -13,7 +13,7 @@ from LogsPrint import print_the_output_statement
 from web_driver import initialize_driver
 
 # Specify the download directory
-download_dir = r'C:\Users\hp\Desktop\ContractorManagementSystem020824\ContractorManagementSystem'
+download_dir = r'C:\Users\rohit\Documents\ExoticaITSolutions\Python_Projects_Code\On-Going Projects\ContractorManagementSystem'
 os.makedirs(download_dir, exist_ok=True)
 
 # Function to read the contractor trades from a JSON file
@@ -91,7 +91,7 @@ class ScrapeThread(QThread):
                     table_data.append(cell_data)
 
                 structured_data = []
-
+                print_the_output_statement(self.text_area, f'Scrapping for {business_type} business type..')
                 # Process table data to extract structured information
                 for row_data in table_data:
                     if len(row_data) > 1:
@@ -154,9 +154,10 @@ class ScrapeThread(QThread):
         finally:
             self.driver.quit()
 
+        trade_only = self.trade_name.split(' - ')[1]
         # Write the structured data to an Excel file in the specified download directory
         if all_data:
-            excel_file_path = os.path.join(download_dir, 'table_data.xlsx')
+            excel_file_path = os.path.join(download_dir, f'Scrapped_{trade_only}_data.xlsx')
             if os.path.exists(excel_file_path):
                 # If file already exists, append new sheet
                 with pd.ExcelWriter(excel_file_path, mode='a', if_sheet_exists='new') as writer:
