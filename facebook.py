@@ -10,10 +10,13 @@ from selenium.common.exceptions import NoSuchElementException
 import time
 import re
 
-NUMBER_OF_MEMBERS_SCRAP = 100
+
+NUMBER_OF_MEMBERS_SCRAP = 10  
 USERNAME = "rimikaexoticait@gmail.com"
 PASSWORD = "asdf123@"
-NUM_TABS = NUMBER_OF_MEMBERS_SCRAP  # Number of concurrent tabs
+NUM_TABS = NUMBER_OF_MEMBERS_SCRAP  
+first_csv = 'facebook_members_data1.csv'
+final_csv = 'final_facebook_member_data1.csv'
 
 def login_facebook():
     chrome_options = Options()
@@ -136,16 +139,14 @@ def scrape_facebook_data():
         
         if profile_data:
             contact_data_list.append(profile_data)
-            print(f"Profile data scraped: {profile_data}")
+            print(f"Profile data scraped: {contact_data_list}")
             print(f"Profile data length: {len(contact_data_list)}")
 
     driver.quit()
-    end_time = time.time()
-    total_time = end_time - start_time
-    print(f"Total execution time: {total_time:.2f} seconds")
+
 
     # Write to CSV
-    with open('facebook_members_data1.csv', 'w', newline='', encoding='utf-8') as csvfile:
+    with open(first_csv, 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['Name', 'Contact Info']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
@@ -153,7 +154,7 @@ def scrape_facebook_data():
             writer.writerow(member)
 
     # Load the CSV file into a DataFrame
-    df = pd.read_csv("facebook_members_data1.csv")
+    df = pd.read_csv(first_csv)
 
     # Initialize new columns
     df["Phone Number"] = ""
@@ -200,11 +201,14 @@ def scrape_facebook_data():
 
     # Drop the 'Contact Info' column
     df = df.drop(columns=["Contact Info"])
-    final_csv = 'final_facebook_member_data1.csv'
+    
 
     # Save the DataFrame to a new CSV file
     df.to_csv(final_csv, index=False)
 
     print(f"Data extraction complete. Updated file saved as {final_csv}.")
+    end_time = time.time()
+    total_time = end_time - start_time
+    print(f"Total execution time: {total_time:.2f} seconds")
 
 scrape_facebook_data()
