@@ -1,4 +1,5 @@
 import csv
+import os
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -207,6 +208,7 @@ def scrape_facebook_data():
     df.to_csv(final_csv, index=False)
 
     print(f"Data extraction complete. Updated file saved as {final_csv}.")
+    os.remove(first_csv)
     end_time = time.time()
     total_time = end_time - start_time
     print(f"Total execution time: {total_time:.2f} seconds")
